@@ -1,0 +1,9 @@
+workspace:
+  base: /go
+  path: src/github.com/foo/bar
+
+pipeline:
+  test:
+    image: alpine
+    commands:
+      - echo hello world

@@ -1,0 +1,23 @@
+pipeline:
+  install:
+    image: node
+    commands:
+      - npm install
+  start:
+    image: node
+    detach: true
+    commands:
+      - npm start
+  test:
+    image: node
+    commands:
+      - npm test
+
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+  cache:
+    image: redis

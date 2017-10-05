@@ -1,0 +1,70 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"name": "n4fbtji8sncddn0g00_test",
+					"alias": "test",
+					"image": "alpine:3.6",
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "",
+							"source": "/foo/bar",
+							"target": "/baz"
+						},
+						{
+							"name": "N4FbTjI8SNcDDn0G_test",
+							"source": "",
+							"target": "/boo"
+						},
+						{
+							"name": "N4FbTjI8SNcDDn0G_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "N4FbTjI8SNcDDn0G_default",
+							"aliases": [
+								"test"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNTE3ADEzMTY1NDU2NTE1ADAxMTE0MwAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgImVjaG8gaGVsbG8gd29ybGQiCmVjaG8gaGVsbG8gd29ybGQKCg==",
+							"target": "/"
+						}
+					]
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "n4fbtji8sncddn0g_default",
+			"driver": "bridge"
+		}
+	],
+	"volumes": [
+		{
+			"name": "n4fbtji8sncddn0g_default",
+			"driver": "local"
+		},
+		{
+			"name": "n4fbtji8sncddn0g_test",
+			"driver": "local"
+		}
+	]
+}

@@ -1,0 +1,59 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"name": "uqua6w53kk53cm9300_test",
+					"alias": "test",
+					"image": "foo/bar:latest",
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "uQUa6w53kk53Cm93_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "uQUa6w53kk53Cm93_default",
+							"aliases": [
+								"test"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {
+						"username": "octocat",
+						"password": "12345"
+					},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNTE3ADEzMTY1NDU2NTE1ADAxMTE0MwAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgImVjaG8gaGVsbG8gd29ybGQiCmVjaG8gaGVsbG8gd29ybGQKCg==",
+							"target": "/"
+						}
+					]
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "uqua6w53kk53cm93_default",
+			"driver": "bridge"
+		}
+	],
+	"volumes": [
+		{
+			"name": "uqua6w53kk53cm93_default",
+			"driver": "local"
+		}
+	]
+}

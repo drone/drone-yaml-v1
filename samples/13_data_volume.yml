@@ -1,0 +1,11 @@
+pipeline:
+  test:
+    image: alpine:3.6
+    volumes:
+      - custom:/foo
+    commands:
+      - echo hello world
+
+volumes:
+  custom:
+    driver: local

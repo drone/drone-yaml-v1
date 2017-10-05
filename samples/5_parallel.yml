@@ -1,0 +1,14 @@
+pipeline:
+  frontend:
+    image: alpine
+    group: build
+    commands:
+      - echo hello world
+  backend:
+    image: alpine
+    group: build
+    commands:
+      - echo hello world
+  notify:
+    image: plugins/slack
+    channel: foo

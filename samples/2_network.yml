@@ -1,0 +1,14 @@
+pipeline:
+  test:
+    image: alpine:3.6
+    networks:
+      - foo
+      - bar
+    commands:
+      - echo hello world
+
+networks:
+  foo:
+    driver: bridge
+  bar:
+    driver: bridge

@@ -1,0 +1,121 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"name": "bkf9z3taqhjwyv3v00_frontend",
+					"alias": "frontend",
+					"image": "alpine:latest",
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "BkF9z3TAqHjwyV3v_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "BkF9z3TAqHjwyV3v_default",
+							"aliases": [
+								"frontend"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNTE3ADEzMTY1NDU2NTE1ADAxMTE0MwAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgImVjaG8gaGVsbG8gd29ybGQiCmVjaG8gaGVsbG8gd29ybGQKCg==",
+							"target": "/"
+						}
+					]
+				},
+				{
+					"name": "bkf9z3taqhjwyv3v01_backend",
+					"alias": "backend",
+					"image": "alpine:latest",
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "BkF9z3TAqHjwyV3v_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "BkF9z3TAqHjwyV3v_default",
+							"aliases": [
+								"backend"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNTE3ADEzMTY1NDU2NTE1ADAxMTE0MwAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgImVjaG8gaGVsbG8gd29ybGQiCmVjaG8gaGVsbG8gd29ybGQKCg==",
+							"target": "/"
+						}
+					]
+				}
+			]
+		},
+		{
+			"steps": [
+				{
+					"name": "bkf9z3taqhjwyv3v10_notify",
+					"alias": "notify",
+					"image": "plugins/slack:latest",
+					"working_dir": "/workspace",
+					"environment": {
+						"PLUGIN_CHANNEL": "foo"
+					},
+					"volumes": [
+						{
+							"name": "BkF9z3TAqHjwyV3v_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "BkF9z3TAqHjwyV3v_default",
+							"aliases": [
+								"notify"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "bkf9z3taqhjwyv3v_default",
+			"driver": "bridge"
+		}
+	],
+	"volumes": [
+		{
+			"name": "bkf9z3taqhjwyv3v_default",
+			"driver": "local"
+		}
+	]
+}

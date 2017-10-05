@@ -1,0 +1,49 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"name": "ydmchjlyt6ijhh2k00_publish",
+					"alias": "publish",
+					"image": "plugins/docker:latest",
+					"privileged": true,
+					"working_dir": "/workspace",
+					"environment": {
+						"PLUGIN_REPO": "foo/bar",
+						"PLUGIN_TAGS": "latest,1,1,1.0.0"
+					},
+					"volumes": [
+						{
+							"name": "yDmchJlyt6ijHH2k_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "yDmchJlyt6ijHH2k_default",
+							"aliases": [
+								"publish"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "ydmchjlyt6ijhh2k_default",
+			"driver": "bridge"
+		}
+	],
+	"volumes": [
+		{
+			"name": "ydmchjlyt6ijhh2k_default",
+			"driver": "local"
+		}
+	]
+}

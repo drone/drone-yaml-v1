@@ -1,0 +1,5 @@
+pipeline:
+  test:
+    image: docker.io/foo/bar
+    commands:
+      - echo hello world

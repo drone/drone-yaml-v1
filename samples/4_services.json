@@ -1,0 +1,189 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"name": "8qmyqsszdtqwxbnt00_database",
+					"alias": "database",
+					"image": "mysql:latest",
+					"detach": true,
+					"environment": {
+						"MYSQL_PASSWORD": "root",
+						"MYSQL_USERNAME": "root"
+					},
+					"volumes": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"aliases": [
+								"database"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				},
+				{
+					"name": "8qmyqsszdtqwxbnt01_cache",
+					"alias": "cache",
+					"image": "redis:latest",
+					"detach": true,
+					"volumes": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"aliases": [
+								"cache"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		},
+		{
+			"steps": [
+				{
+					"name": "8qmyqsszdtqwxbnt10_install",
+					"alias": "install",
+					"image": "node:latest",
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"aliases": [
+								"install"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNTA1ADEzMTY1NDU2NTE1ADAxMTE0MAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgIm5wbSBpbnN0YWxsIgpucG0gaW5zdGFsbAoK",
+							"target": "/"
+						}
+					]
+				}
+			]
+		},
+		{
+			"steps": [
+				{
+					"name": "8qmyqsszdtqwxbnt20_start",
+					"alias": "start",
+					"image": "node:latest",
+					"detach": true,
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"aliases": [
+								"start"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNTAxADEzMTY1NDU2NTE1ADAxMTEzNAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgIm5wbSBzdGFydCIKbnBtIHN0YXJ0Cgo=",
+							"target": "/"
+						}
+					]
+				}
+			]
+		},
+		{
+			"steps": [
+				{
+					"name": "8qmyqsszdtqwxbnt30_test",
+					"alias": "test",
+					"image": "node:latest",
+					"working_dir": "/workspace",
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"source": "",
+							"target": "/workspace"
+						}
+					],
+					"networks": [
+						{
+							"name": "8QmYqssZdTqWXbNt_default",
+							"aliases": [
+								"test"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNDc3ADEzMTY1NDU2NTE1ADAxMTE1MAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgIm5wbSB0ZXN0IgpucG0gdGVzdAoK",
+							"target": "/"
+						}
+					]
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "8qmyqsszdtqwxbnt_default",
+			"driver": "bridge"
+		}
+	],
+	"volumes": [
+		{
+			"name": "8qmyqsszdtqwxbnt_default",
+			"driver": "local"
+		}
+	]
+}

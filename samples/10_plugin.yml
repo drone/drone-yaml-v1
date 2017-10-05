@@ -1,0 +1,10 @@
+clone:
+  default:
+    image: plugins/git
+    depth: 1
+
+pipeline:
+  publish:
+    image: plugins/docker
+    repo: foo/bar
+    tags: [ latest, 1, 1.0, 1.0.0 ]
