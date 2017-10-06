@@ -4,25 +4,26 @@
 		{
 			"steps": [
 				{
-					"name": "ydmchjlyt6ijhh2k00_publish",
+					"name": "ssutdldavcj5ezei00_publish",
 					"alias": "publish",
 					"image": "plugins/docker:latest",
 					"privileged": true,
 					"working_dir": "/workspace",
 					"environment": {
+						"DRONE_STEP": "publish",
 						"PLUGIN_REPO": "foo/bar",
 						"PLUGIN_TAGS": "latest,1,1,1.0.0"
 					},
 					"volumes": [
 						{
-							"name": "yDmchJlyt6ijHH2k_default",
+							"name": "ssutdldavcj5ezei_default",
 							"source": "",
 							"target": "/workspace"
 						}
 					],
 					"networks": [
 						{
-							"name": "yDmchJlyt6ijHH2k_default",
+							"name": "ssutdldavcj5ezei_default",
 							"aliases": [
 								"publish"
 							]
@@ -36,13 +37,13 @@
 	],
 	"networks": [
 		{
-			"name": "ydmchjlyt6ijhh2k_default",
+			"name": "ssutdldavcj5ezei_default",
 			"driver": "bridge"
 		}
 	],
 	"volumes": [
 		{
-			"name": "ydmchjlyt6ijhh2k_default",
+			"name": "ssutdldavcj5ezei_default",
 			"driver": "local"
 		}
 	]

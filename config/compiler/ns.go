@@ -2,6 +2,7 @@ package compiler
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone-runtime/engine"
@@ -12,7 +13,7 @@ import (
 // namespace is responsible for namespacing the container resources to
 // prevent name conflicts on a shared host.
 func namespace(dst *engine.Config, src *config.Config) {
-	ns := uniuri.New()
+	ns := strings.ToLower(uniuri.New())
 	for i, stage := range dst.Stages {
 		for ii, step := range stage.Steps {
 			step.Alias = step.Name

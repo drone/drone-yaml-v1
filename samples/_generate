@@ -1,17 +1,17 @@
 #!/bin/sh
 
-drone-yaml --trusted samples/1_simple.yml   > samples/1_simple.json
-drone-yaml --trusted samples/2_network.yml  > samples/2_network.json
-drone-yaml --trusted samples/3_volumes.yml  > samples/3_volumes.json
-drone-yaml --trusted samples/4_services.yml > samples/4_services.json
-drone-yaml --trusted samples/5_parallel.yml > samples/5_parallel.json
+drone-yaml-v1 --trusted samples/1_simple.yml   > samples/1_simple.json
+drone-yaml-v1 --trusted samples/2_network.yml  > samples/2_network.json
+drone-yaml-v1 --trusted samples/3_volumes.yml  > samples/3_volumes.json
+drone-yaml-v1 --trusted samples/4_services.yml > samples/4_services.json
+drone-yaml-v1 --trusted samples/5_parallel.yml > samples/5_parallel.json
 
-drone-yaml --registry=https://octocat:12345@docker.io samples/7_registry.yml > samples/7_registry.json
-drone-yaml --secret=SSH_USERNAME=root --secret=SSH_PASSWORD=12345 samples/8_secrets.yml > samples/8_secrets.json
-drone-yaml --netrc-login=octocat --netrc-password=12345 --netrc-machine=github.com samples/9_netrc.yml > samples/9_netrc.json
+drone-yaml-v1 --registry=https://octocat:12345@docker.io samples/7_registry.yml > samples/7_registry.json
+drone-yaml-v1 --secret=SSH_USERNAME=root --secret=SSH_PASSWORD=12345 samples/8_secrets.yml > samples/8_secrets.json
+drone-yaml-v1 --netrc-login=octocat --netrc-password=12345 --netrc-machine=github.com samples/9_netrc.yml > samples/9_netrc.json
 
 
-drone-yaml --trusted samples/10_plugin.yml > samples/10_plugin.json
-drone-yaml --mem-limit=2GB --mem-swap-limit=4GB samples/11_limits.yml > samples/11_limits.json
+drone-yaml-v1 --trusted samples/10_plugin.yml > samples/10_plugin.json
+drone-yaml-v1 --mem-limit=2GB --mem-swap-limit=4GB samples/11_limits.yml > samples/11_limits.json
 
-drone-yaml --trusted samples/12_workspace.yml > samples/12_workspace.json
+drone-yaml-v1 --trusted samples/12_workspace.yml > samples/12_workspace.json
