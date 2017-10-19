@@ -4,7 +4,7 @@
 		{
 			"steps": [
 				{
-					"name": "ssutdldavcj5ezei00_publish",
+					"name": "lxkcunudzhcalrdd00_publish",
 					"alias": "publish",
 					"image": "plugins/docker:latest",
 					"privileged": true,
@@ -16,14 +16,14 @@
 					},
 					"volumes": [
 						{
-							"name": "ssutdldavcj5ezei_default",
+							"name": "lxkcunudzhcalrdd_default",
 							"source": "",
 							"target": "/workspace"
 						}
 					],
 					"networks": [
 						{
-							"name": "ssutdldavcj5ezei_default",
+							"name": "lxkcunudzhcalrdd_default",
 							"aliases": [
 								"publish"
 							]
@@ -37,13 +37,13 @@
 	],
 	"networks": [
 		{
-			"name": "ssutdldavcj5ezei_default",
+			"name": "lxkcunudzhcalrdd_default",
 			"driver": "bridge"
 		}
 	],
 	"volumes": [
 		{
-			"name": "ssutdldavcj5ezei_default",
+			"name": "lxkcunudzhcalrdd_default",
 			"driver": "local"
 		}
 	]

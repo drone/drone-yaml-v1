@@ -1,0 +1,12 @@
+workspace:
+  base: /go
+  path: src/github.com/drone/expr
+
+pipeline:
+  test:
+    image: golang
+    commands:
+      - pwd
+      - env
+      - go get github.com/kr/pretty
+      - go test -v ./...

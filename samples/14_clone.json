@@ -1,0 +1,99 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"name": "rz5i61yqrcks6fiq00_clone",
+					"alias": "clone",
+					"image": "plugins/git:1",
+					"working_dir": "/go/src/github.com/drone/expr",
+					"environment": {
+						"DRONE_BRANCH": "master",
+						"DRONE_COMMIT_SHA": "c0e474cb2b076afba767d6cff9ec8d0949f5518a",
+						"DRONE_EVENT": "psuh",
+						"DRONE_REF": "refs/head/master",
+						"DRONE_REMOTE_URL": "https://github.com/drone/expr.git",
+						"DRONE_STEP": "clone"
+					},
+					"volumes": [
+						{
+							"name": "rz5i61yqrcks6fiq_default",
+							"source": "",
+							"target": "/go"
+						}
+					],
+					"networks": [
+						{
+							"name": "rz5i61yqrcks6fiq_default",
+							"aliases": [
+								"clone"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		},
+		{
+			"steps": [
+				{
+					"name": "rz5i61yqrcks6fiq10_test",
+					"alias": "test",
+					"image": "golang:latest",
+					"working_dir": "/go/src/github.com/drone/expr",
+					"environment": {
+						"DRONE_BRANCH": "master",
+						"DRONE_COMMIT_SHA": "c0e474cb2b076afba767d6cff9ec8d0949f5518a",
+						"DRONE_EVENT": "psuh",
+						"DRONE_REF": "refs/head/master",
+						"DRONE_REMOTE_URL": "https://github.com/drone/expr.git",
+						"DRONE_STEP": "test"
+					},
+					"entrypoint": [
+						"/bin/sh"
+					],
+					"command": [
+						"/bin/_drone"
+					],
+					"volumes": [
+						{
+							"name": "rz5i61yqrcks6fiq_default",
+							"source": "",
+							"target": "/go"
+						}
+					],
+					"networks": [
+						{
+							"name": "rz5i61yqrcks6fiq_default",
+							"aliases": [
+								"test"
+							]
+						}
+					],
+					"on_success": true,
+					"auth_config": {},
+					"restore": [
+						{
+							"source": "data:application/octet-stream;base64,YmluL19kcm9uZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAMDAwMDAwMAAwMDAwMDAwADAwMDAwMDAwNjY1ADEzMTcyMjIyMjY0ADAxMTEzNQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwADAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaWYgWyAtbiAiJENJX05FVFJDX01BQ0hJTkUiIF07IHRoZW4KY2F0IDw8RU9GID4gJEhPTUUvLm5ldHJjCm1hY2hpbmUgJENJX05FVFJDX01BQ0hJTkUKbG9naW4gJENJX05FVFJDX1VTRVJOQU1FCnBhc3N3b3JkICRDSV9ORVRSQ19QQVNTV09SRApFT0YKY2htb2QgMDYwMCAkSE9NRS8ubmV0cmMKZmkKdW5zZXQgQ0lfTkVUUkNfVVNFUk5BTUUKdW5zZXQgQ0lfTkVUUkNfUEFTU1dPUkQKdW5zZXQgQ0lfU0NSSVBUCnVuc2V0IERST05FX05FVFJDX1VTRVJOQU1FCnVuc2V0IERST05FX05FVFJDX1BBU1NXT1JECgplY2hvICsgInB3ZCIKcHdkCgplY2hvICsgImVudiIKZW52CgplY2hvICsgImdvIGdldCBnaXRodWIuY29tL2tyL3ByZXR0eSIKZ28gZ2V0IGdpdGh1Yi5jb20va3IvcHJldHR5CgplY2hvICsgImdvIHRlc3QgLXYgLi8uLi4iCmdvIHRlc3QgLXYgLi8uLi4KCg==",
+							"target": "/"
+						}
+					]
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "rz5i61yqrcks6fiq_default",
+			"driver": "bridge"
+		}
+	],
+	"volumes": [
+		{
+			"name": "rz5i61yqrcks6fiq_default",
+			"driver": "local"
+		}
+	]
+}

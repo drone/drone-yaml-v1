@@ -101,8 +101,9 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 
 	if !c.noclone {
 		if len(conf.Clone.Containers) == 0 {
-			dst := &engine.Step{Name: "clone", Image: "plugins/git:1"}
+			dst := &engine.Step{}
 			src := &yaml.Container{Name: "clone", Image: "plugins/git:1"}
+			copyContainer(dst, src)
 			for _, t := range c.transforms {
 				t(dst, src, conf)
 			}

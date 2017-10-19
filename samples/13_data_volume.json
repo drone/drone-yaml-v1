@@ -4,9 +4,9 @@
 		{
 			"steps": [
 				{
-					"name": "mxtezk2ili3mbhqi00_test",
+					"name": "fpv83n16uj52lkgw00_test",
 					"alias": "test",
-					"image": "alpine:latest",
+					"image": "alpine:3.6",
 					"working_dir": "/workspace",
 					"environment": {
 						"DRONE_STEP": "test"
@@ -19,14 +19,19 @@
 					],
 					"volumes": [
 						{
-							"name": "mxtezk2ili3mbhqi_default",
+							"name": "fpv83n16uj52lkgw_custom",
+							"source": "",
+							"target": "/foo"
+						},
+						{
+							"name": "fpv83n16uj52lkgw_default",
 							"source": "",
 							"target": "/workspace"
 						}
 					],
 					"networks": [
 						{
-							"name": "mxtezk2ili3mbhqi_default",
+							"name": "fpv83n16uj52lkgw_default",
 							"aliases": [
 								"test"
 							]
@@ -46,13 +51,17 @@
 	],
 	"networks": [
 		{
-			"name": "mxtezk2ili3mbhqi_default",
+			"name": "fpv83n16uj52lkgw_default",
 			"driver": "bridge"
 		}
 	],
 	"volumes": [
 		{
-			"name": "mxtezk2ili3mbhqi_default",
+			"name": "fpv83n16uj52lkgw_default",
+			"driver": "local"
+		},
+		{
+			"name": "fpv83n16uj52lkgw_custom",
 			"driver": "local"
 		}
 	]

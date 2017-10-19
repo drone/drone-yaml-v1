@@ -15,3 +15,15 @@ drone-yaml-v1 --trusted samples/10_plugin.yml > samples/10_plugin.json
 drone-yaml-v1 --mem-limit=2GB --mem-swap-limit=4GB samples/11_limits.yml > samples/11_limits.json
 
 drone-yaml-v1 --trusted samples/12_workspace.yml > samples/12_workspace.json
+drone-yaml-v1 --trusted samples/13_data_volume.yml > samples/13_data_volume.json
+
+
+drone-yaml-v1 \
+  --clone \
+  --env=DRONE_REF=refs/heads/master \
+  --env=DRONE_EVENT=psuh \
+  --env=DRONE_COMMIT_SHA=c0e474cb2b076afba767d6cff9ec8d0949f5518a \
+  --env=DRONE_BRANCH=master \
+  --env=DRONE_REF=refs/head/master \
+  --env=DRONE_REMOTE_URL=https://github.com/drone/expr.git \
+  samples/14_clone.yml > samples/14_clone.json

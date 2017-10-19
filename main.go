@@ -20,6 +20,7 @@ var (
 	source       = kingpin.Arg("source", "source file location").Required().File()
 	target       = kingpin.Arg("target", "target file location").String()
 	trusted      = kingpin.Flag("trusted", "trusted mode").Bool()
+	clone        = kingpin.Flag("clone", "clone step").Bool()
 	volume       = kingpin.Flag("volume", "attached volumes").Strings()
 	network      = kingpin.Flag("network", "attached networks").Strings()
 	environ      = kingpin.Flag("env", "environment variable").StringMap()
@@ -83,7 +84,7 @@ func main() {
 	}
 
 	var opts = []compiler.Option{
-		compiler.WithClone(false),
+		compiler.WithClone(*clone),
 		compiler.WithEnviron(*environ),
 		compiler.WithLimits(
 			compiler.Resources{
