@@ -199,6 +199,7 @@ func copyContainer(dst *engine.Step, src *yaml.Container) {
 	dst.DNSSearch = src.DNSSearch
 	dst.NetworkMode = src.NetworkMode
 	dst.IpcMode = src.IpcMode
+	dst.Sysctls = src.Sysctls.Map
 	dst.ErrIgnore = src.ErrIgnore
 	dst.OnSuccess = calcOnSucess(src)
 	dst.OnFailure = calcOnFailure(src)

@@ -71,7 +71,7 @@
   branch = "master"
   name = "github.com/drone/drone-runtime"
   packages = ["engine","version"]
-  revision = "3e8bd99f60f4032226523320cd2b2321f9525159"
+  revision = "d884896efa995bde1169babada90028ac4ba8e3c"
 
 [[projects]]
   branch = "master"

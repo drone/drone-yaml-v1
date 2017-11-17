@@ -105,6 +105,11 @@ func TestLintErrors(t *testing.T) {
 			from: "pipeline: { build: { image: golang, network_mode: 'container:name' }  }",
 			want: "Insufficient privileges to use network_mode",
 		},
+		{
+			from: "pipeline: { build: { image: golang, sysctls: [ net.core.somaxconn=1024 ] }  }",
+			want: "Insufficient privileges to use sysctls",
+		},
+
 		//
 		// cannot override entypoint, command for script steps
 		//

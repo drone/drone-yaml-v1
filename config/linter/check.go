@@ -150,6 +150,9 @@ func CheckTrusted(trusted bool) Check {
 		if len(container.IpcMode) != 0 {
 			return fmt.Errorf("Insufficient privileges to use ipc_mode")
 		}
+		if len(container.Sysctls.Map) != 0 {
+			return fmt.Errorf("Insufficient privileges to use sysctls")
+		}
 		if container.Networks.Networks != nil && len(container.Networks.Networks) != 0 {
 			return fmt.Errorf("Insufficient privileges to use networks")
 		}

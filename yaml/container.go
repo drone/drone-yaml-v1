@@ -45,6 +45,7 @@ type (
 		Pull          bool                   `yaml:"pull,omitempty"`
 		Shell         string                 `yaml:"shell,omitempty"`
 		ShmSize       MemStringInt           `yaml:"shm_size,omitempty"`
+		Sysctls       SliceMap               `yaml:"sysctls,omitempty"`
 		Volumes       []*Volume              `yaml:"volumes,omitempty"`
 		Secrets       Secrets                `yaml:"secrets,omitempty"`
 		Reports       Reports                `yaml:"reports,omitempty"`
