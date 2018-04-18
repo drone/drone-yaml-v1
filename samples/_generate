@@ -21,7 +21,7 @@ drone-yaml-v1 --trusted samples/13_data_volume.yml > samples/13_data_volume.json
 drone-yaml-v1 \
   --clone \
   --env=DRONE_REF=refs/heads/master \
-  --env=DRONE_EVENT=psuh \
+  --env=DRONE_EVENT=push \
   --env=DRONE_COMMIT_SHA=c0e474cb2b076afba767d6cff9ec8d0949f5518a \
   --env=DRONE_BRANCH=master \
   --env=DRONE_REF=refs/head/master \
