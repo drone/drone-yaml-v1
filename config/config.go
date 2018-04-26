@@ -8,6 +8,8 @@ type (
 		Platform  string
 		Version   yaml.StringInt
 		Branches  yaml.Constraint
+		Events    yaml.Constraint
+		Files     yaml.Constraint
 		Clone     *yaml.Container
 		Pipeline  yaml.Containers
 		Services  yaml.Containers

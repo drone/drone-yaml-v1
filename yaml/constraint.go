@@ -1,6 +1,8 @@
 package yaml
 
-import "path/filepath"
+import (
+	filepath "github.com/bmatcuk/doublestar"
+)
 
 type (
 	// Constraints defines a set of runtime constraints.

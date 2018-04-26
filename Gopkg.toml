@@ -46,3 +46,7 @@
   branch = "fix-for-issue-91"
   name = "gopkg.in/yaml.v2"
   source = "https://github.com/vinzenz/yaml.git"
+
+[[constraint]]
+  name = "github.com/bmatcuk/doublestar"
+  version = "1.0.9"

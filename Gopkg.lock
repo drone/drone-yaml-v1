@@ -22,7 +22,10 @@
 [[projects]]
   branch = "master"
   name = "github.com/alecthomas/template"
-  packages = [".","parse"]
+  packages = [
+    ".",
+    "parse"
+  ]
   revision = "a0175ee3bccc567396460bf5acd36800cb10c49c"
 
 [[projects]]
@@ -30,6 +33,12 @@
   name = "github.com/alecthomas/units"
   packages = ["."]
   revision = "2efee857e7cfd4f3d0138cc3cbb1b4966962b93a"
+
+[[projects]]
+  name = "github.com/bmatcuk/doublestar"
+  packages = ["."]
+  revision = "b3608229437ba4dc33dae64d56a79a2a73f1f6b2"
+  version = "v1.0.9"
 
 [[projects]]
   name = "github.com/coreos/go-semver"
@@ -45,19 +54,63 @@
 
 [[projects]]
   name = "github.com/docker/distribution"
-  packages = [".","context","digest","reference","uuid"]
+  packages = [
+    ".",
+    "context",
+    "digest",
+    "reference",
+    "uuid"
+  ]
   revision = "48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89"
   version = "v2.6.2"
 
 [[projects]]
   name = "github.com/docker/docker"
-  packages = ["api/types","api/types/blkiodev","api/types/container","api/types/filters","api/types/mount","api/types/network","api/types/registry","api/types/strslice","api/types/swarm","api/types/versions","daemon/graphdriver","image","image/v1","layer","oci","pkg/archive","pkg/chrootarchive","pkg/fileutils","pkg/idtools","pkg/ioutils","pkg/longpath","pkg/mount","pkg/plugingetter","pkg/plugins","pkg/plugins/transport","pkg/pools","pkg/promise","pkg/random","pkg/reexec","pkg/stringid","pkg/system","plugin/v2","reference"]
+  packages = [
+    "api/types",
+    "api/types/blkiodev",
+    "api/types/container",
+    "api/types/filters",
+    "api/types/mount",
+    "api/types/network",
+    "api/types/registry",
+    "api/types/strslice",
+    "api/types/swarm",
+    "api/types/versions",
+    "daemon/graphdriver",
+    "image",
+    "image/v1",
+    "layer",
+    "oci",
+    "pkg/archive",
+    "pkg/chrootarchive",
+    "pkg/fileutils",
+    "pkg/idtools",
+    "pkg/ioutils",
+    "pkg/longpath",
+    "pkg/mount",
+    "pkg/plugingetter",
+    "pkg/plugins",
+    "pkg/plugins/transport",
+    "pkg/pools",
+    "pkg/promise",
+    "pkg/random",
+    "pkg/reexec",
+    "pkg/stringid",
+    "pkg/system",
+    "plugin/v2",
+    "reference"
+  ]
   revision = "092cba3727bb9b4a2f0e922cd6c0f93ea270e363"
   version = "v1.13.1"
 
 [[projects]]
   name = "github.com/docker/go-connections"
-  packages = ["nat","sockets","tlsconfig"]
+  packages = [
+    "nat",
+    "sockets",
+    "tlsconfig"
+  ]
   revision = "3ede32e2033de7505e6500d6c868c2b9ed9f169d"
   version = "v0.3.0"
 
@@ -70,7 +123,10 @@
 [[projects]]
   branch = "master"
   name = "github.com/drone/drone-runtime"
-  packages = ["engine","version"]
+  packages = [
+    "engine",
+    "version"
+  ]
   revision = "d884896efa995bde1169babada90028ac4ba8e3c"
 
 [[projects]]
@@ -123,7 +179,12 @@
 
 [[projects]]
   name = "github.com/opencontainers/runc"
-  packages = ["libcontainer/configs","libcontainer/devices","libcontainer/system","libcontainer/user"]
+  packages = [
+    "libcontainer/configs",
+    "libcontainer/devices",
+    "libcontainer/system",
+    "libcontainer/user"
+  ]
   revision = "baf6536d6259209c3edfa2b22237af82942d3dfa"
   version = "v0.1.1"
 
@@ -147,7 +208,11 @@
 
 [[projects]]
   name = "github.com/vbatts/tar-split"
-  packages = ["archive/tar","tar/asm","tar/storage"]
+  packages = [
+    "archive/tar",
+    "tar/asm",
+    "tar/storage"
+  ]
   revision = "d3f1b54304d656376e58f9406a9cb4775799a357"
   version = "v0.10.1"
 
@@ -166,13 +231,19 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["context","proxy"]
+  packages = [
+    "context",
+    "proxy"
+  ]
   revision = "a04bdaca5b32abe1c069418fb7088ae607de5bd0"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = ["unix","windows"]
+  packages = [
+    "unix",
+    "windows"
+  ]
   revision = "314a259e304ff91bd6985da2a7149bbf91237993"
 
 [[projects]]
@@ -185,6 +256,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a16f1b5e444d657c2d10baade44278428b0cb9b8d6193573e04b5f8ab5c37833"
+  inputs-digest = "f7d661b0b910c51824570b4eb4d1ce4bad652a9325c067b1412dfc954267c9c0"
   solver-name = "gps-cdcl"
   solver-version = 1

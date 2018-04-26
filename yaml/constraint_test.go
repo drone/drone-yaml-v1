@@ -138,6 +138,17 @@ func TestConstraint(t *testing.T) {
 			with: "master",
 			want: true,
 		},
+		// double star
+		{
+			conf: "foo/**",
+			with: "foo/bar/baz/qux",
+			want: true,
+		},
+		{
+			conf: "foo/**/qux",
+			with: "foo/bar/baz/qux",
+			want: true,
+		},
 	}
 	for _, test := range testdata {
 		c := parseConstraint(test.conf)
