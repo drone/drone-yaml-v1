@@ -100,7 +100,7 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 	}
 
 	if !c.noclone {
-		if len(conf.Clone.Containers) == 0 {
+		if container := conf.Clone; container == nil {
 			dst := &engine.Step{}
 			src := &yaml.Container{Name: "clone", Image: "plugins/git:1"}
 			copyContainer(dst, src)
@@ -111,17 +111,14 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 			spec.Stages = append(spec.Stages, stage)
 			stage.Steps = append(stage.Steps, dst)
 		} else {
-			for _, src := range conf.Clone.Containers {
-				dst := new(engine.Step)
+			src := container
+			dst := new(engine.Step)
 
-				for _, t := range c.transforms {
-					t(dst, src, conf)
-				}
+			for _, t := range c.transforms {
+				t(dst, src, conf)
+			}
 
-				if calcSkip(src, c.metadata) {
-					continue
-				}
-
+			if !calcSkip(src, c.metadata) {
 				stage := new(engine.Stage)
 				spec.Stages = append(spec.Stages, stage)
 				stage.Steps = append(stage.Steps, dst)

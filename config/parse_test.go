@@ -18,6 +18,10 @@ func TestParse(t *testing.T) {
 			Base: "/go",
 			Path: "src/github.com/octocat/hello-world",
 		},
+		Clone: &yaml.Container{
+			Image:    "docker:git",
+			Commands: []string{"git clone https://github.com/octocat/hello-world.git"},
+		},
 		Branches: yaml.Constraint{
 			Include: []string{"master"},
 		},
@@ -72,6 +76,10 @@ platform: linux/amd64
 workspace:
   path: src/github.com/octocat/hello-world
   base: /go
+clone:
+  image: docker:git
+  commands:
+    - git clone https://github.com/octocat/hello-world.git
 pipeline:
   test:
     image: golang

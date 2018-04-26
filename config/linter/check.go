@@ -20,7 +20,7 @@ type Check func(*config.Config) error
 // we could chain the checks together to reduce the number of iterations.
 func CheckContainer(check func(*config.Config, *yaml.Container) error) Check {
 	return func(conf *config.Config) error {
-		for _, container := range conf.Clone.Containers {
+		if container := conf.Clone; container != nil {
 			if err := check(conf, container); err != nil {
 				return err
 			}

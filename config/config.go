@@ -8,7 +8,7 @@ type (
 		Platform  string
 		Version   yaml.StringInt
 		Branches  yaml.Constraint
-		Clone     yaml.Containers
+		Clone     *yaml.Container
 		Pipeline  yaml.Containers
 		Services  yaml.Containers
 		Labels    yaml.SliceMap
