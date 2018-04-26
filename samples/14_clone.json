@@ -11,7 +11,7 @@
 					"environment": {
 						"DRONE_BRANCH": "master",
 						"DRONE_COMMIT_SHA": "c0e474cb2b076afba767d6cff9ec8d0949f5518a",
-						"DRONE_EVENT": "psuh",
+						"DRONE_EVENT": "push",
 						"DRONE_REF": "refs/head/master",
 						"DRONE_REMOTE_URL": "https://github.com/drone/expr.git",
 						"DRONE_STEP": "clone"
@@ -46,7 +46,7 @@
 					"environment": {
 						"DRONE_BRANCH": "master",
 						"DRONE_COMMIT_SHA": "c0e474cb2b076afba767d6cff9ec8d0949f5518a",
-						"DRONE_EVENT": "psuh",
+						"DRONE_EVENT": "push",
 						"DRONE_REF": "refs/head/master",
 						"DRONE_REMOTE_URL": "https://github.com/drone/expr.git",
 						"DRONE_STEP": "test"
