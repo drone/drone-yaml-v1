@@ -31,6 +31,12 @@ func TestParse(t *testing.T) {
 		Volumes: map[string]Volume{
 			"custom": {Driver: "blockbridge"},
 		},
+		Secrets: map[string]Secret{
+			"password": {
+				Driver:     "custom",
+				DriverOpts: map[string]interface{}{"custom.foo": "bar"},
+			},
+		},
 		Labels: yaml.SliceMap{
 			map[string]string{
 				"com.example.type": "build",
@@ -106,6 +112,11 @@ volumes:
 labels:
   com.example.type: "build"
   com.example.team: "frontend"
+secrets:
+  password:
+    driver: custom
+    driver_opts:
+      custom.foo: "bar"
 `
 
 //

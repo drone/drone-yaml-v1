@@ -16,6 +16,7 @@ type (
 		Labels    yaml.SliceMap
 		Networks  map[string]Network
 		Volumes   map[string]Volume
+		Secrets   map[string]Secret
 		Workspace Workspace
 	}
 
@@ -35,5 +36,11 @@ type (
 	Network struct {
 		Driver     string
 		DriverOpts map[string]string `yaml:"driver_opts,omitempty"`
+	}
+
+	// Secret represents the container secret configuration.
+	Secret struct {
+		Driver     string
+		DriverOpts map[string]interface{} `yaml:"driver_opts,omitempty"`
 	}
 )
