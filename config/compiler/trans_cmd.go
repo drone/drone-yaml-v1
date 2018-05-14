@@ -79,6 +79,10 @@ unset CI_NETRC_PASSWORD
 unset CI_SCRIPT
 unset DRONE_NETRC_USERNAME
 unset DRONE_NETRC_PASSWORD
+
+set -o pipefail
+set -e
+
 %s
 `
 
