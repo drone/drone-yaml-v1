@@ -25,7 +25,7 @@ func CheckContainer(check func(*config.Config, *yaml.Container) error) Check {
 				return err
 			}
 		}
-		for _, container := range conf.Pipeline.Containers {
+		for _, container := range conf.Pipeline.Steps {
 			if err := check(conf, container); err != nil {
 				return err
 			}
@@ -41,7 +41,7 @@ func CheckContainer(check func(*config.Config, *yaml.Container) error) Check {
 
 // CheckPipeline checks the pipeline block is not empty.
 func CheckPipeline(conf *config.Config) error {
-	if len(conf.Pipeline.Containers) == 0 {
+	if len(conf.Pipeline.Steps) == 0 {
 		return fmt.Errorf("Invalid or missing pipeline section")
 	}
 	return nil

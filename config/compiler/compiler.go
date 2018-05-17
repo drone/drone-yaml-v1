@@ -146,7 +146,7 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 
 	var stage *engine.Stage
 	var group string
-	for _, src := range conf.Pipeline.Containers {
+	for _, src := range conf.Pipeline.Steps {
 		if stage == nil || group != src.Group || src.Group == "" {
 			group = src.Group
 			stage = new(engine.Stage)

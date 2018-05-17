@@ -51,8 +51,9 @@ func TestParse(t *testing.T) {
 				},
 			},
 		},
-		Pipeline: yaml.Containers{
-			Containers: []*yaml.Container{
+		Pipeline: yaml.Pipeline{
+			Name: "default",
+			Steps: []*yaml.Container{
 				{
 					Name:     "test",
 					Image:    "golang",
@@ -130,8 +131,9 @@ func TestParseAnchor(t *testing.T) {
 		t.Error(err)
 	}
 	want := &Config{
-		Pipeline: yaml.Containers{
-			Containers: []*yaml.Container{
+		Pipeline: yaml.Pipeline{
+			Name: "default",
+			Steps: []*yaml.Container{
 				{
 					Name:  "notify_fail",
 					Image: "plugins/slack",
@@ -163,4 +165,79 @@ pipeline:
     << : *SLACK
     when:
       status: success
+`
+
+//
+// the purpose behind this anchor test is to ensure we are using
+// a patched version of go-yaml
+//
+
+func TestParseMulti(t *testing.T) {
+	got, err := ParseMultiString(sampleYamlMulti)
+	if err != nil {
+		t.Error(err)
+	}
+	want := []*Config{
+		&Config{
+			Platform: "linux/amd64",
+			Pipeline: yaml.Pipeline{
+				Name: "backend",
+				Steps: []*yaml.Container{
+					&yaml.Container{
+						Commands: []string{"go get", "go build"},
+						Image:    "golang",
+						Name:     "build",
+					},
+					&yaml.Container{
+						Commands: []string{"go test", "go lint"},
+						Image:    "golang",
+						Name:     "test",
+					},
+				},
+			},
+		},
+		&Config{
+			Platform: "linux/arm",
+			Pipeline: yaml.Pipeline{
+				Name: "frontend",
+				Steps: []*yaml.Container{
+					&yaml.Container{
+						Commands: []string{"npm install", "npm test"},
+						Image:    "node",
+						Name:     "test",
+					},
+				},
+			},
+		},
+	}
+	if diff := pretty.Diff(got, want); len(diff) != 0 {
+		t.Errorf("Failed to parse multi-yaml document. Diff %s", diff)
+	}
+}
+
+var sampleYamlMulti = `---
+platform: linux/amd64
+pipeline:
+  name: backend
+  steps:
+    - name: build
+      image: golang
+      commands:
+        - go get
+        - go build
+    - name: test
+      image: golang
+      commands:
+        - go test
+        - go lint
+---
+platform: linux/arm
+pipeline:
+  name: frontend
+  steps:
+    - name: test
+      image: node
+      commands:
+        - npm install
+        - npm test
 `

@@ -11,7 +11,7 @@ type (
 		Events    yaml.Constraint
 		Files     yaml.Constraint
 		Clone     *yaml.Container
-		Pipeline  yaml.Containers
+		Pipeline  yaml.Pipeline
 		Services  yaml.Containers
 		Labels    yaml.SliceMap
 		Networks  map[string]Network
