@@ -51,6 +51,7 @@ func TestParse(t *testing.T) {
 				},
 			},
 		},
+		DependsOn: yaml.StringSlice{"frontend", "backend"},
 		Pipeline: yaml.Pipeline{
 			Name: "default",
 			Steps: []*yaml.Container{
@@ -118,6 +119,7 @@ secrets:
     driver: custom
     driver_opts:
       custom.foo: "bar"
+depends_on: [ frontend, backend ]
 `
 
 //

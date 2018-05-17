@@ -7,6 +7,7 @@ type (
 	Config struct {
 		Platform  string
 		Version   yaml.StringInt
+		DependsOn yaml.StringSlice `yaml:"depends_on"`
 		Branches  yaml.Constraint
 		Events    yaml.Constraint
 		Files     yaml.Constraint
