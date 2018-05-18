@@ -15,6 +15,7 @@ type (
 		Event       Constraint
 		Branch      Constraint
 		Status      Constraint
+		Paths       Constraint
 		Matrix      ConstraintMap
 	}
 
@@ -42,6 +43,17 @@ func (c *Constraint) Match(v string) bool {
 	}
 	if len(c.Include) == 0 {
 		return true
+	}
+	return false
+}
+
+// MatchAny returns true if the one or more of the strings matches the include
+// patterns and does not match any of the exclude patterns.
+func (c *Constraint) MatchAny(v []string) bool {
+	for _, s := range v {
+		if c.Match(s) {
+			return true
+		}
 	}
 	return false
 }

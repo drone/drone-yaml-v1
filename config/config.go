@@ -9,7 +9,7 @@ type (
 		Version   yaml.StringInt
 		DependsOn yaml.StringSlice `yaml:"depends_on"`
 		Branches  yaml.Constraint
-		Events    yaml.Constraint
+		Trigger   yaml.Constraints
 		Files     yaml.Constraint
 		Clone     *yaml.Container
 		Pipeline  yaml.Pipeline

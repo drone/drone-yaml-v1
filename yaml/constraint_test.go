@@ -6,7 +6,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-func TestConstraint(t *testing.T) {
+func TestConstraintMatch(t *testing.T) {
 	testdata := []struct {
 		conf string
 		with string
@@ -155,6 +155,47 @@ func TestConstraint(t *testing.T) {
 		got, want := c.Match(test.with), test.want
 		if got != want {
 			t.Errorf("Expect %q matches %q is %v", test.with, test.conf, want)
+		}
+	}
+}
+
+func TestConstraintMatchAny(t *testing.T) {
+	testdata := []struct {
+		conf string
+		with []string
+		want bool
+	}{
+		{
+			conf: "foo/bar",
+			with: []string{"foo/bar"},
+			want: true,
+		},
+		{
+			conf: "foo/*",
+			with: []string{"foo/bar"},
+			want: true,
+		},
+		{
+			conf: "foo/*",
+			with: []string{"foo/baz", "/foo/bar"},
+			want: true,
+		},
+		{
+			conf: "foo/**",
+			with: []string{"foo/bar/baz/qux"},
+			want: true,
+		},
+		{
+			conf: "foo/**",
+			with: []string{"bar/baz/qux/foo"},
+			want: false,
+		},
+	}
+	for _, test := range testdata {
+		c := parseConstraint(test.conf)
+		got, want := c.MatchAny(test.with), test.want
+		if got != want {
+			t.Errorf("Expect %+v matches %q is %v", test.with, test.conf, want)
 		}
 	}
 }
