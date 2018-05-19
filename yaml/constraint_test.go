@@ -190,6 +190,11 @@ func TestConstraintMatchAny(t *testing.T) {
 			with: []string{"bar/baz/qux/foo"},
 			want: false,
 		},
+		{
+			conf: "",
+			with: []string{},
+			want: true,
+		},
 	}
 	for _, test := range testdata {
 		c := parseConstraint(test.conf)

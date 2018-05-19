@@ -50,6 +50,9 @@ func (c *Constraint) Match(v string) bool {
 // MatchAny returns true if the one or more of the strings matches the include
 // patterns and does not match any of the exclude patterns.
 func (c *Constraint) MatchAny(v []string) bool {
+	if len(c.Include)+len(c.Exclude) == 0 {
+		return true
+	}
 	for _, s := range v {
 		if c.Match(s) {
 			return true
