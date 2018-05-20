@@ -2,22 +2,10 @@
 
 
 [[projects]]
-  name = "github.com/Microsoft/go-winio"
-  packages = ["."]
-  revision = "78439966b38d69bf38227fbf57ac8a6fee70f69a"
-  version = "v0.4.5"
-
-[[projects]]
-  name = "github.com/Sirupsen/logrus"
-  packages = ["."]
-  revision = "f006c2ac4710855cf0f916dd6b77acf6b048dc6e"
-  version = "v1.0.3"
-
-[[projects]]
   name = "github.com/alecthomas/kingpin"
   packages = ["."]
-  revision = "1087e65c9441605df944fb12c33f0fe7072d18ca"
-  version = "v2.2.5"
+  revision = "947dcec5ba9c011838740e680966fd7087a71d0d"
+  version = "v2.2.6"
 
 [[projects]]
   branch = "master"
@@ -55,70 +43,17 @@
 [[projects]]
   name = "github.com/docker/distribution"
   packages = [
-    ".",
-    "context",
     "digest",
-    "reference",
-    "uuid"
+    "reference"
   ]
   revision = "48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89"
   version = "v2.6.2"
 
 [[projects]]
-  name = "github.com/docker/docker"
-  packages = [
-    "api/types",
-    "api/types/blkiodev",
-    "api/types/container",
-    "api/types/filters",
-    "api/types/mount",
-    "api/types/network",
-    "api/types/registry",
-    "api/types/strslice",
-    "api/types/swarm",
-    "api/types/versions",
-    "daemon/graphdriver",
-    "image",
-    "image/v1",
-    "layer",
-    "oci",
-    "pkg/archive",
-    "pkg/chrootarchive",
-    "pkg/fileutils",
-    "pkg/idtools",
-    "pkg/ioutils",
-    "pkg/longpath",
-    "pkg/mount",
-    "pkg/plugingetter",
-    "pkg/plugins",
-    "pkg/plugins/transport",
-    "pkg/pools",
-    "pkg/promise",
-    "pkg/random",
-    "pkg/reexec",
-    "pkg/stringid",
-    "pkg/system",
-    "plugin/v2",
-    "reference"
-  ]
-  revision = "092cba3727bb9b4a2f0e922cd6c0f93ea270e363"
-  version = "v1.13.1"
-
-[[projects]]
-  name = "github.com/docker/go-connections"
-  packages = [
-    "nat",
-    "sockets",
-    "tlsconfig"
-  ]
-  revision = "3ede32e2033de7505e6500d6c868c2b9ed9f169d"
-  version = "v0.3.0"
-
-[[projects]]
   name = "github.com/docker/go-units"
   packages = ["."]
-  revision = "0dadbb0345b35ec7ef35e228dabb8de89a65bf52"
-  version = "v0.3.2"
+  revision = "47565b4f722fb6ceae66b95f853feed578a4a51c"
+  version = "v0.3.3"
 
 [[projects]]
   branch = "master"
@@ -127,7 +62,7 @@
     "engine",
     "version"
   ]
-  revision = "d884896efa995bde1169babada90028ac4ba8e3c"
+  revision = "15b4cacaab1a1bcafb61e246a6207b7b13bf5a1c"
 
 [[projects]]
   branch = "master"
@@ -142,34 +77,22 @@
   version = "v1.0.0"
 
 [[projects]]
-  name = "github.com/gorilla/context"
-  packages = ["."]
-  revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
-  version = "v1.1"
-
-[[projects]]
-  name = "github.com/gorilla/mux"
-  packages = ["."]
-  revision = "24fca303ac6da784b9e8269f724ddeb0b2eea5e7"
-  version = "v1.5.0"
-
-[[projects]]
   name = "github.com/gosimple/slug"
   packages = ["."]
   revision = "e9f42fa127660e552d0ad2b589868d403a9be7c6"
   version = "v1.1.1"
 
 [[projects]]
-  branch = "master"
   name = "github.com/kr/pretty"
   packages = ["."]
-  revision = "cfb55aafdaf3ec08f0db22699ab822c50091b1c4"
+  revision = "73f6ac0b30a98e433b289500d779f50c1a6f0712"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/kr/text"
   packages = ["."]
-  revision = "7cafcd837844e784b526369c9bce262804aebc60"
+  revision = "e2ffdb16a802fe2bb95e2e35ff34f0e53aeef34f"
+  version = "v0.1.0"
 
 [[projects]]
   name = "github.com/mattn/go-isatty"
@@ -178,43 +101,10 @@
   version = "v0.0.3"
 
 [[projects]]
-  name = "github.com/opencontainers/runc"
-  packages = [
-    "libcontainer/configs",
-    "libcontainer/devices",
-    "libcontainer/system",
-    "libcontainer/user"
-  ]
-  revision = "baf6536d6259209c3edfa2b22237af82942d3dfa"
-  version = "v0.1.1"
-
-[[projects]]
-  name = "github.com/opencontainers/runtime-spec"
-  packages = ["specs-go"]
-  revision = "02137cd4e50b37a01665e1731fcd4ac2d2178230"
-  version = "v1.0.0"
-
-[[projects]]
-  name = "github.com/pkg/errors"
-  packages = ["."]
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
-
-[[projects]]
   branch = "master"
   name = "github.com/rainycape/unidecode"
   packages = ["."]
   revision = "cb7f23ec59bec0d61b19c56cd88cee3d0cc1870c"
-
-[[projects]]
-  name = "github.com/vbatts/tar-split"
-  packages = [
-    "archive/tar",
-    "tar/asm",
-    "tar/storage"
-  ]
-  revision = "d3f1b54304d656376e58f9406a9cb4775799a357"
-  version = "v0.10.1"
 
 [[projects]]
   branch = "master"
@@ -224,27 +114,9 @@
 
 [[projects]]
   branch = "master"
-  name = "golang.org/x/crypto"
-  packages = ["ssh/terminal"]
-  revision = "9419663f5a44be8b34ca85f08abc5fe1be11f8a3"
-
-[[projects]]
-  branch = "master"
-  name = "golang.org/x/net"
-  packages = [
-    "context",
-    "proxy"
-  ]
-  revision = "a04bdaca5b32abe1c069418fb7088ae607de5bd0"
-
-[[projects]]
-  branch = "master"
   name = "golang.org/x/sys"
-  packages = [
-    "unix",
-    "windows"
-  ]
-  revision = "314a259e304ff91bd6985da2a7149bbf91237993"
+  packages = ["unix"]
+  revision = "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b"
 
 [[projects]]
   branch = "fix-for-issue-91"
@@ -256,6 +128,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f7d661b0b910c51824570b4eb4d1ce4bad652a9325c067b1412dfc954267c9c0"
+  inputs-digest = "6066e5bf6d6b862bee7f02d56125c45e5f8eb14d1fe6c85876cf31f3c0876c6e"
   solver-name = "gps-cdcl"
   solver-version = 1

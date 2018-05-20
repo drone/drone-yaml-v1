@@ -38,6 +38,10 @@ func Test_trimImage(t *testing.T) {
 			want: "golang",
 		},
 		{
+			from: "docker.io/library/golang:1.0.0",
+			want: "golang",
+		},
+		{
 			from: "gcr.io/library/golang:1.0.0",
 			want: "gcr.io/library/golang",
 		},

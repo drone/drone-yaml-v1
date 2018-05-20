@@ -1,11 +1,29 @@
 package compiler
 
 import (
-	"github.com/docker/docker/reference"
+	"fmt"
+	"strings"
+
+	"github.com/docker/distribution/reference"
+)
+
+const (
+	// defaultTag defines the default tag used when performing images related actions and no tag or digest is specified
+	defaultTag = "latest"
+	// defaultHostname is the default built-in hostname
+	defaultHostname = "docker.io"
+	// legacyDefaultHostname is automatically converted to DefaultHostname
+	legacyDefaultHostname = "index.docker.io"
+	// defaultRepoPrefix is the prefix used for default repositories in default host
+	defaultRepoPrefix = "library"
 )
 
 // trimImage returns the short image name without tag.
 func trimImage(name string) string {
+	name = strings.TrimPrefix(name, legacyDefaultHostname+"/")
+	name = strings.TrimPrefix(name, defaultHostname+"/")
+	name = strings.TrimPrefix(name, defaultRepoPrefix+"/")
+
 	ref, err := reference.ParseNamed(name)
 	if err != nil {
 		return name
@@ -19,7 +37,16 @@ func expandImage(name string) string {
 	if err != nil {
 		return name
 	}
-	return reference.WithDefaultTag(ref).String()
+	s := ref.String()
+
+	if !strings.Contains(s, ":") {
+		s = fmt.Sprintf("%s:%s", s, defaultTag)
+	}
+
+	s = strings.TrimPrefix(s, legacyDefaultHostname+"/")
+	s = strings.TrimPrefix(s, defaultRepoPrefix+"/")
+
+	return s
 }
 
 // matchImage returns true if the image name matches
@@ -42,5 +69,15 @@ func matchHostname(image, hostname string) bool {
 	if err != nil {
 		return false
 	}
-	return ref.Hostname() == hostname
+	hn, _ := reference.SplitHostname(ref)
+
+	if hn == "" || hn == defaultRepoPrefix {
+		hn = defaultHostname
+	}
+
+	if hn == hostname {
+		return true
+	}
+
+	return false
 }
