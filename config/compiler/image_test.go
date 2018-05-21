@@ -66,31 +66,31 @@ func Test_expandImage(t *testing.T) {
 	}{
 		{
 			from: "golang",
-			want: "golang:latest",
+			want: "docker.io/library/golang:latest",
 		},
 		{
 			from: "golang:latest",
-			want: "golang:latest",
+			want: "docker.io/library/golang:latest",
 		},
 		{
 			from: "golang:1.0.0",
-			want: "golang:1.0.0",
+			want: "docker.io/library/golang:1.0.0",
 		},
 		{
 			from: "library/golang",
-			want: "golang:latest",
+			want: "docker.io/library/golang:latest",
 		},
 		{
 			from: "library/golang:latest",
-			want: "golang:latest",
+			want: "docker.io/library/golang:latest",
 		},
 		{
 			from: "library/golang:1.0.0",
-			want: "golang:1.0.0",
+			want: "docker.io/library/golang:1.0.0",
 		},
 		{
 			from: "index.docker.io/library/golang:1.0.0",
-			want: "golang:1.0.0",
+			want: "docker.io/library/golang:1.0.0",
 		},
 		{
 			from: "gcr.io/golang",
