@@ -5,6 +5,7 @@ import "github.com/drone/drone-yaml-v1/yaml"
 type (
 	// Config represents the pipeline configuration.
 	Config struct {
+		Name      string
 		Platform  string
 		Version   yaml.StringInt
 		DependsOn yaml.StringSlice `yaml:"depends_on"`
@@ -41,6 +42,9 @@ type (
 
 	// Secret represents the container secret configuration.
 	Secret struct {
+		External   yaml.External
+		File       string
+		Secretbox  string
 		Driver     string
 		DriverOpts map[string]interface{} `yaml:"driver_opts,omitempty"`
 	}
