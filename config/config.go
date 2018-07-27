@@ -44,6 +44,8 @@ type (
 	Secret struct {
 		External   yaml.External
 		File       string
+		Aescbc     string
+		Aesgcm     string
 		Secretbox  string
 		Driver     string
 		DriverOpts map[string]interface{} `yaml:"driver_opts,omitempty"`
