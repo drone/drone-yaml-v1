@@ -9,6 +9,7 @@ import (
 
 func TestIsService(t *testing.T) {
 	conf := new(config.Config)
+	conf.Services = map[string]*yaml.Container{}
 	container := new(yaml.Container)
 
 	if got, want := IsService(conf, container), false; got != want {
@@ -20,7 +21,7 @@ func TestIsService(t *testing.T) {
 		t.Errorf("Expect detached contianer classified as service")
 	}
 
-	conf.Services.Containers = append(conf.Services.Containers, container)
+	conf.Services["mysql"] = container
 	container.Detached = false
 	if got, want := IsService(conf, container), true; got != want {
 		t.Errorf("Expect service contianer classified as service")

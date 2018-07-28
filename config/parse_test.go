@@ -13,17 +13,16 @@ func TestParse(t *testing.T) {
 		t.Error(err)
 	}
 	want := &Config{
-		Platform: "linux/amd64",
+		Version: 1,
+		Platform: Platform{
+			Name: "linux/amd64",
+		},
 		Workspace: Workspace{
 			Base: "/go",
 			Path: "src/github.com/octocat/hello-world",
 		},
-		Clone: &yaml.Container{
-			Image:    "docker:git",
-			Commands: []string{"git clone https://github.com/octocat/hello-world.git"},
-		},
-		Branches: yaml.Constraint{
-			Include: []string{"master"},
+		Clone: Clone{
+			Depth: 50,
 		},
 		Networks: map[string]Network{
 			"custom": {Driver: "overlay"},
@@ -33,8 +32,9 @@ func TestParse(t *testing.T) {
 		},
 		Secrets: map[string]Secret{
 			"password": {
-				Driver:     "custom",
-				DriverOpts: map[string]interface{}{"custom.foo": "bar"},
+				External: yaml.External{
+					External: true,
+				},
 			},
 		},
 		Labels: yaml.SliceMap{
@@ -43,32 +43,30 @@ func TestParse(t *testing.T) {
 				"com.example.team": "frontend",
 			},
 		},
-		Services: yaml.Containers{
-			Containers: []*yaml.Container{
-				{
-					Name:  "database",
-					Image: "mysql",
-				},
-			},
+		Services: map[string]*yaml.Container{
+			"database": &yaml.Container{Image: "mysql"},
 		},
 		DependsOn: yaml.StringSlice{"frontend", "backend"},
-		Pipeline: yaml.Pipeline{
-			Name: "default",
-			Steps: []*yaml.Container{
-				{
-					Name:     "test",
+		Pipeline: []map[string]*yaml.Container{
+			map[string]*yaml.Container{
+				"test": &yaml.Container{
 					Image:    "golang",
 					Commands: []string{"go install", "go test"},
 				},
-				{
-					Name:     "build",
+			},
+			map[string]*yaml.Container{
+				"build": &yaml.Container{
 					Image:    "golang",
 					Commands: []string{"go build"},
 				},
-				{
-					Name:  "notify",
+			},
+			map[string]*yaml.Container{
+				"slack": &yaml.Container{
 					Image: "plugins/slack",
 					Vargs: map[string]interface{}{"channel": "dev"},
+				},
+				"gitter": &yaml.Container{
+					Image: "plugins/gitter",
 				},
 			},
 		},
@@ -80,46 +78,57 @@ func TestParse(t *testing.T) {
 }
 
 var sampleYaml = `
-platform: linux/amd64
+version: 1
+
+platform:
+  name: linux/amd64
+
 workspace:
   path: src/github.com/octocat/hello-world
   base: /go
+
 clone:
-  image: docker:git
-  commands:
-    - git clone https://github.com/octocat/hello-world.git
+  depth: 50
+
 pipeline:
-  test:
-    image: golang
-    commands:
+  - test:
+      image: golang
+      commands:
       - go install
       - go test
-  build:
-    image: golang
-    commands:
+  - build:
+      image: golang
+      commands:
       - go build
-  notify:
-    image: plugins/slack
-    channel: dev
+  - slack:
+      image: plugins/slack
+      channel: dev
+    gitter:
+      image: plugins/gitter
+
 services:
   database:
     image: mysql
-branches: [ master ]
+
 networks:
   custom:
     driver: overlay
+
 volumes:
   custom:
     driver: blockbridge
+
 labels:
   com.example.type: "build"
   com.example.team: "frontend"
+
 secrets:
   password:
-    driver: custom
-    driver_opts:
-      custom.foo: "bar"
-depends_on: [ frontend, backend ]
+    external: true
+
+depends_on:
+- frontend
+- backend
 `
 
 //
@@ -133,15 +142,14 @@ func TestParseAnchor(t *testing.T) {
 		t.Error(err)
 	}
 	want := &Config{
-		Pipeline: yaml.Pipeline{
-			Name: "default",
-			Steps: []*yaml.Container{
-				{
-					Name:  "notify_fail",
+		Pipeline: []map[string]*yaml.Container{
+			map[string]*yaml.Container{
+				"notify_fail": &yaml.Container{
 					Image: "plugins/slack",
 				},
-				{
-					Name:  "notify_success",
+			},
+			map[string]*yaml.Container{
+				"notify_success": &yaml.Container{
 					Image: "plugins/slack",
 					Constraints: yaml.Constraints{
 						Status: yaml.Constraint{
@@ -152,6 +160,7 @@ func TestParseAnchor(t *testing.T) {
 			},
 		},
 	}
+
 	diff := pretty.Diff(got, want)
 	if len(diff) != 0 {
 		t.Errorf("Failed to parse yaml with anchors. Diff %s", diff)
@@ -162,11 +171,11 @@ var sampleYamlAnchors = `
 _slack: &SLACK
   image: plugins/slack
 pipeline:
-  notify_fail: *SLACK
-  notify_success:
-    << : *SLACK
-    when:
-      status: success
+  - notify_fail: *SLACK
+  - notify_success:
+      << : *SLACK
+      when:
+        status: success
 `
 
 //
@@ -181,32 +190,40 @@ func TestParseMulti(t *testing.T) {
 	}
 	want := []*Config{
 		&Config{
-			Platform: "linux/amd64",
-			Pipeline: yaml.Pipeline{
+			Metadata: Metadata{
 				Name: "backend",
-				Steps: []*yaml.Container{
-					&yaml.Container{
+			},
+			Platform: Platform{
+				Name: "linux/amd64",
+			},
+
+			Pipeline: []map[string]*yaml.Container{
+				map[string]*yaml.Container{
+					"build": &yaml.Container{
 						Commands: []string{"go get", "go build"},
 						Image:    "golang",
-						Name:     "build",
 					},
-					&yaml.Container{
+				},
+				map[string]*yaml.Container{
+					"test": &yaml.Container{
 						Commands: []string{"go test", "go lint"},
 						Image:    "golang",
-						Name:     "test",
 					},
 				},
 			},
 		},
 		&Config{
-			Platform: "linux/arm",
-			Pipeline: yaml.Pipeline{
+			Metadata: Metadata{
 				Name: "frontend",
-				Steps: []*yaml.Container{
-					&yaml.Container{
+			},
+			Platform: Platform{
+				Name: "linux/arm",
+			},
+			Pipeline: []map[string]*yaml.Container{
+				map[string]*yaml.Container{
+					"test": &yaml.Container{
 						Commands: []string{"npm install", "npm test"},
 						Image:    "node",
-						Name:     "test",
 					},
 				},
 			},
@@ -218,26 +235,30 @@ func TestParseMulti(t *testing.T) {
 }
 
 var sampleYamlMulti = `---
-platform: linux/amd64
-pipeline:
+metadata:
   name: backend
-  steps:
-    - name: build
+platform:
+  name: linux/amd64
+pipeline:
+  - build:
       image: golang
       commands:
         - go get
         - go build
-    - name: test
+  - test:
       image: golang
       commands:
         - go test
         - go lint
 ---
-platform: linux/arm
+metadata:
+	name: frontend
+
+platform:
+	name: linux/arm
+
 pipeline:
-  name: frontend
-  steps:
-    - name: test
+  - test:
       image: node
       commands:
         - npm install

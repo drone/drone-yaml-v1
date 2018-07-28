@@ -20,17 +20,14 @@ type Check func(*config.Config) error
 // we could chain the checks together to reduce the number of iterations.
 func CheckContainer(check func(*config.Config, *yaml.Container) error) Check {
 	return func(conf *config.Config) error {
-		if container := conf.Clone; container != nil {
-			if err := check(conf, container); err != nil {
-				return err
+		for _, stage := range conf.Pipeline {
+			for _, container := range stage {
+				if err := check(conf, container); err != nil {
+					return err
+				}
 			}
 		}
-		for _, container := range conf.Pipeline.Steps {
-			if err := check(conf, container); err != nil {
-				return err
-			}
-		}
-		for _, container := range conf.Services.Containers {
+		for _, container := range conf.Services {
 			if err := check(conf, container); err != nil {
 				return err
 			}
@@ -41,7 +38,7 @@ func CheckContainer(check func(*config.Config, *yaml.Container) error) Check {
 
 // CheckPipeline checks the pipeline block is not empty.
 func CheckPipeline(conf *config.Config) error {
-	if len(conf.Pipeline.Steps) == 0 {
+	if len(conf.Pipeline) == 0 {
 		return fmt.Errorf("Invalid or missing pipeline section")
 	}
 	return nil
@@ -181,7 +178,7 @@ func IsService(conf *config.Config, container *yaml.Container) bool {
 	if container.Detached {
 		return true
 	}
-	for _, service := range conf.Services.Containers {
+	for _, service := range conf.Services {
 		if service == container {
 			return true
 		}

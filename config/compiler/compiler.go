@@ -99,37 +99,23 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 		spec.Volumes = append(spec.Volumes, dst)
 	}
 
-	if !c.noclone {
-		if container := conf.Clone; container == nil {
-			dst := &engine.Step{}
-			src := &yaml.Container{Name: "clone", Image: "plugins/git:1"}
-			copyContainer(dst, src)
-			for _, t := range c.transforms {
-				t(dst, src, conf)
-			}
-			stage := new(engine.Stage)
-			spec.Stages = append(spec.Stages, stage)
-			stage.Steps = append(stage.Steps, dst)
-		} else {
-			src := container
-			dst := new(engine.Step)
-
-			for _, t := range c.transforms {
-				t(dst, src, conf)
-			}
-
-			if !calcSkip(src, c.metadata) {
-				stage := new(engine.Stage)
-				spec.Stages = append(spec.Stages, stage)
-				stage.Steps = append(stage.Steps, dst)
-			}
+	if c.noclone == false || conf.Clone.Disabled == true {
+		dst := &engine.Step{}
+		src := &yaml.Container{Name: "clone", Image: "plugins/git:1"}
+		copyContainer(dst, src)
+		for _, t := range c.transforms {
+			t(dst, src, conf)
 		}
+		stage := new(engine.Stage)
+		spec.Stages = append(spec.Stages, stage)
+		stage.Steps = append(stage.Steps, dst)
 	}
 
-	if len(conf.Services.Containers) != 0 {
+	if len(conf.Services) != 0 {
 		stage := new(engine.Stage)
-		for _, src := range conf.Services.Containers {
+		for name, src := range conf.Services {
 			dst := new(engine.Step)
+			dst.Name = name
 			copyService(dst, src)
 			for _, t := range c.transforms {
 				t(dst, src, conf)
@@ -144,25 +130,21 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 		}
 	}
 
-	var stage *engine.Stage
-	var group string
-	for _, src := range conf.Pipeline.Steps {
-		if stage == nil || group != src.Group || src.Group == "" {
-			group = src.Group
-			stage = new(engine.Stage)
+	for _, group := range conf.Pipeline {
+		stage := new(engine.Stage)
+		for name, src := range group {
+			dst := new(engine.Step)
+			dst.Name = name
+			copyContainer(dst, src)
+			for _, t := range c.transforms {
+				t(dst, src, conf)
+			}
+			if calcSkip(src, c.metadata) {
+				continue
+			}
+			stage.Steps = append(stage.Steps, dst)
 		}
-
-		dst := new(engine.Step)
-		copyContainer(dst, src)
-		for _, t := range c.transforms {
-			t(dst, src, conf)
-		}
-		if calcSkip(src, c.metadata) {
-			continue
-		}
-		stage.Steps = append(stage.Steps, dst)
-
-		if len(stage.Steps) == 1 {
+		if len(stage.Steps) != 0 {
 			spec.Stages = append(spec.Stages, stage)
 		}
 	}
