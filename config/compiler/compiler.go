@@ -114,8 +114,8 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 	if len(conf.Services) != 0 {
 		stage := new(engine.Stage)
 		for name, src := range conf.Services {
+			src.Name = name
 			dst := new(engine.Step)
-			dst.Name = name
 			copyService(dst, src)
 			for _, t := range c.transforms {
 				t(dst, src, conf)
@@ -133,8 +133,8 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 	for _, group := range conf.Pipeline {
 		stage := new(engine.Stage)
 		for name, src := range group {
+			src.Name = name
 			dst := new(engine.Step)
-			dst.Name = name
 			copyContainer(dst, src)
 			for _, t := range c.transforms {
 				t(dst, src, conf)
