@@ -1,0 +1,61 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"id": 0,
+					"name": "ynfwfo0qec2ycb9600_test",
+					"alias": "test",
+					"image": "docker.io/library/golang:1.10.3-windowsservercore-1803",
+					"working_dir": "c:\\gopath/src\\github.com\\drone\\envsubst",
+					"environment": {
+						"CI_SCRIPT": "CiRFcnJvckFjdGlvblByZWZlcmVuY2UgPSAnU3RvcCc7CiZjbWQgL2MgIm1rZGlyIGM6XHJvb3QiOwppZiAoJEVudjpDSV9ORVRSQ19NQUNISU5FKSB7CiRuZXRyYz1bc3RyaW5nXTo6Rm9ybWF0KCJ7MH1cX25ldHJjIiwkRW52OkhPTUUpOwoibWFjaGluZSAkRW52OkNJX05FVFJDX01BQ0hJTkUiID4+ICRuZXRyYzsKImxvZ2luICRFbnY6Q0lfTkVUUkNfVVNFUk5BTUUiID4+ICRuZXRyYzsKInBhc3N3b3JkICRFbnY6Q0lfTkVUUkNfUEFTU1dPUkQiID4+ICRuZXRyYzsKfTsKW0Vudmlyb25tZW50XTo6U2V0RW52aXJvbm1lbnRWYXJpYWJsZSgiQ0lfTkVUUkNfUEFTU1dPUkQiLCRudWxsKTsKW0Vudmlyb25tZW50XTo6U2V0RW52aXJvbm1lbnRWYXJpYWJsZSgiQ0lfU0NSSVBUIiwkbnVsbCk7CltFbnZpcm9ubWVudF06OlNldEVudmlyb25tZW50VmFyaWFibGUoIkRST05FX05FVFJDX1VTRVJOQU1FIiwkbnVsbCk7CltFbnZpcm9ubWVudF06OlNldEVudmlyb25tZW50VmFyaWFibGUoIkRST05FX05FVFJDX1BBU1NXT1JEIiwkbnVsbCk7CgpXcml0ZS1PdXRwdXQgKCcrICJnbyB2ZXJzaW9uIicpOwomIGdvIHZlcnNpb247IGlmICgkTEFTVEVYSVRDT0RFIC1uZSAwKSB7ZXhpdCAkTEFTVEVYSVRDT0RFfQoK",
+						"DRONE_STEP": "test",
+						"HOME": "c:\\root",
+						"SHELL": "powershell.exe"
+					},
+					"entrypoint": [
+						"powershell",
+						"-noprofile",
+						"-noninteractive",
+						"-command"
+					],
+					"command": [
+						"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Env:CI_SCRIPT)) | iex"
+					],
+					"volumes": [
+						{
+							"name": "ynfwfo0qec2ycb96_default",
+							"source": "",
+							"target": "c:\\gopath"
+						}
+					],
+					"networks": [
+						{
+							"name": "ynfwfo0qec2ycb96_default",
+							"aliases": [
+								"test"
+							],
+							"ports": null
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "ynfwfo0qec2ycb96_default",
+			"driver": "nat"
+		}
+	],
+	"volumes": [
+		{
+			"name": "ynfwfo0qec2ycb96_default",
+			"driver": "local"
+		}
+	]
+}

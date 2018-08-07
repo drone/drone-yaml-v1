@@ -1,0 +1,115 @@
+{
+	"version": 1,
+	"pipeline": [
+		{
+			"steps": [
+				{
+					"id": 0,
+					"name": "gpuqh8m3bazwuzzd00_clone",
+					"alias": "clone",
+					"image": "docker.io/library/golang:1.10.3-windowsservercore-1803",
+					"working_dir": "c:\\gopath/src\\github.com\\drone\\envsubst",
+					"environment": {
+						"CI_SCRIPT": "CiRFcnJvckFjdGlvblByZWZlcmVuY2UgPSAnU3RvcCc7CiZjbWQgL2MgIm1rZGlyIGM6XHJvb3QiOwppZiAoJEVudjpDSV9ORVRSQ19NQUNISU5FKSB7CiRuZXRyYz1bc3RyaW5nXTo6Rm9ybWF0KCJ7MH1cX25ldHJjIiwkRW52OkhPTUUpOwoibWFjaGluZSAkRW52OkNJX05FVFJDX01BQ0hJTkUiID4+ICRuZXRyYzsKImxvZ2luICRFbnY6Q0lfTkVUUkNfVVNFUk5BTUUiID4+ICRuZXRyYzsKInBhc3N3b3JkICRFbnY6Q0lfTkVUUkNfUEFTU1dPUkQiID4+ICRuZXRyYzsKfTsKW0Vudmlyb25tZW50XTo6U2V0RW52aXJvbm1lbnRWYXJpYWJsZSgiQ0lfTkVUUkNfUEFTU1dPUkQiLCRudWxsKTsKW0Vudmlyb25tZW50XTo6U2V0RW52aXJvbm1lbnRWYXJpYWJsZSgiQ0lfU0NSSVBUIiwkbnVsbCk7CltFbnZpcm9ubWVudF06OlNldEVudmlyb25tZW50VmFyaWFibGUoIkRST05FX05FVFJDX1VTRVJOQU1FIiwkbnVsbCk7CltFbnZpcm9ubWVudF06OlNldEVudmlyb25tZW50VmFyaWFibGUoIkRST05FX05FVFJDX1BBU1NXT1JEIiwkbnVsbCk7CgpXcml0ZS1PdXRwdXQgKCcrICJnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2Ryb25lL2VudnN1YnN0IC4iJyk7CiYgZ2l0IGNsb25lIGh0dHBzOi8vZ2l0aHViLmNvbS9kcm9uZS9lbnZzdWJzdCAuOyBpZiAoJExBU1RFWElUQ09ERSAtbmUgMCkge2V4aXQgJExBU1RFWElUQ09ERX0KCldyaXRlLU91dHB1dCAoJysgImdpdCBjaGVja291dCBcJERST05FX0NPTU1JVF9TSEEiJyk7CiYgZ2l0IGNoZWNrb3V0ICREUk9ORV9DT01NSVRfU0hBOyBpZiAoJExBU1RFWElUQ09ERSAtbmUgMCkge2V4aXQgJExBU1RFWElUQ09ERX0KCg==",
+						"DRONE_BRANCH": "master",
+						"DRONE_COMMIT_SHA": "c0e474cb2b076afba767d6cff9ec8d0949f5518a",
+						"DRONE_EVENT": "push",
+						"DRONE_REF": "refs/head/master",
+						"DRONE_REMOTE_URL": "https://github.com/drone/expr.git",
+						"DRONE_STEP": "clone",
+						"HOME": "c:\\root",
+						"SHELL": "powershell.exe"
+					},
+					"entrypoint": [
+						"powershell",
+						"-noprofile",
+						"-noninteractive",
+						"-command"
+					],
+					"command": [
+						"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Env:CI_SCRIPT)) | iex"
+					],
+					"volumes": [
+						{
+							"name": "gpuqh8m3bazwuzzd_default",
+							"source": "",
+							"target": "c:\\gopath"
+						}
+					],
+					"networks": [
+						{
+							"name": "gpuqh8m3bazwuzzd_default",
+							"aliases": [
+								"clone"
+							],
+							"ports": null
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		},
+		{
+			"steps": [
+				{
+					"id": 0,
+					"name": "gpuqh8m3bazwuzzd10_test",
+					"alias": "test",
+					"image": "docker.io/library/golang:1.10.3-windowsservercore-1803",
+					"working_dir": "c:\\gopath/src\\github.com\\drone\\envsubst",
+					"environment": {
+						"CI_SCRIPT": "CiRFcnJvckFjdGlvblByZWZlcmVuY2UgPSAnU3RvcCc7CiZjbWQgL2MgIm1rZGlyIGM6XHJvb3QiOwppZiAoJEVudjpDSV9ORVRSQ19NQUNISU5FKSB7CiRuZXRyYz1bc3RyaW5nXTo6Rm9ybWF0KCJ7MH1cX25ldHJjIiwkRW52OkhPTUUpOwoibWFjaGluZSAkRW52OkNJX05FVFJDX01BQ0hJTkUiID4+ICRuZXRyYzsKImxvZ2luICRFbnY6Q0lfTkVUUkNfVVNFUk5BTUUiID4+ICRuZXRyYzsKInBhc3N3b3JkICRFbnY6Q0lfTkVUUkNfUEFTU1dPUkQiID4+ICRuZXRyYzsKfTsKW0Vudmlyb25tZW50XTo6U2V0RW52aXJvbm1lbnRWYXJpYWJsZSgiQ0lfTkVUUkNfUEFTU1dPUkQiLCRudWxsKTsKW0Vudmlyb25tZW50XTo6U2V0RW52aXJvbm1lbnRWYXJpYWJsZSgiQ0lfU0NSSVBUIiwkbnVsbCk7CltFbnZpcm9ubWVudF06OlNldEVudmlyb25tZW50VmFyaWFibGUoIkRST05FX05FVFJDX1VTRVJOQU1FIiwkbnVsbCk7CltFbnZpcm9ubWVudF06OlNldEVudmlyb25tZW50VmFyaWFibGUoIkRST05FX05FVFJDX1BBU1NXT1JEIiwkbnVsbCk7CgpXcml0ZS1PdXRwdXQgKCcrICJkaXIiJyk7CiYgZGlyOyBpZiAoJExBU1RFWElUQ09ERSAtbmUgMCkge2V4aXQgJExBU1RFWElUQ09ERX0KCldyaXRlLU91dHB1dCAoJysgImdvIGdldCAtdCAuLy4uLiInKTsKJiBnbyBnZXQgLXQgLi8uLi47IGlmICgkTEFTVEVYSVRDT0RFIC1uZSAwKSB7ZXhpdCAkTEFTVEVYSVRDT0RFfQoKV3JpdGUtT3V0cHV0ICgnKyAiZ28gdGVzdCAtdiAuLy4uLiInKTsKJiBnbyB0ZXN0IC12IC4vLi4uOyBpZiAoJExBU1RFWElUQ09ERSAtbmUgMCkge2V4aXQgJExBU1RFWElUQ09ERX0KCg==",
+						"DRONE_BRANCH": "master",
+						"DRONE_COMMIT_SHA": "c0e474cb2b076afba767d6cff9ec8d0949f5518a",
+						"DRONE_EVENT": "push",
+						"DRONE_REF": "refs/head/master",
+						"DRONE_REMOTE_URL": "https://github.com/drone/expr.git",
+						"DRONE_STEP": "test",
+						"HOME": "c:\\root",
+						"SHELL": "powershell.exe"
+					},
+					"entrypoint": [
+						"powershell",
+						"-noprofile",
+						"-noninteractive",
+						"-command"
+					],
+					"command": [
+						"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Env:CI_SCRIPT)) | iex"
+					],
+					"volumes": [
+						{
+							"name": "gpuqh8m3bazwuzzd_default",
+							"source": "",
+							"target": "c:\\gopath"
+						}
+					],
+					"networks": [
+						{
+							"name": "gpuqh8m3bazwuzzd_default",
+							"aliases": [
+								"test"
+							],
+							"ports": null
+						}
+					],
+					"on_success": true,
+					"auth_config": {}
+				}
+			]
+		}
+	],
+	"networks": [
+		{
+			"name": "gpuqh8m3bazwuzzd_default",
+			"driver": "nat"
+		}
+	],
+	"volumes": [
+		{
+			"name": "gpuqh8m3bazwuzzd_default",
+			"driver": "local"
+		}
+	]
+}

@@ -16,6 +16,10 @@ import (
 )
 
 func transformCommand(dst *engine.Step, src *yaml.Container, conf *config.Config) {
+	if conf.Platform.Name == "windows/amd64" {
+		transformCommandWin(dst, src, conf)
+		return
+	}
 	if len(src.Commands) == 0 {
 		return
 	}
@@ -23,6 +27,7 @@ func transformCommand(dst *engine.Step, src *yaml.Container, conf *config.Config
 	if len(src.Shell) == 0 {
 		shell = "/bin/sh"
 	}
+
 	script := generateScriptPosix(src.Commands)
 	dst.Entrypoint = []string{shell}
 	dst.Command = []string{"/bin/_drone"}

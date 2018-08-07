@@ -1,0 +1,22 @@
+platform:
+  name: windows/amd64
+
+workspace:
+  base: c:\gopath
+  path: src\github.com\drone\envsubst
+
+clone:
+  disable: true
+
+pipeline:
+- clone:
+    image: golang:1.10.3-windowsservercore-1803
+    commands:
+    - git clone https://github.com/drone/envsubst .
+    - git checkout $DRONE_COMMIT_SHA
+- test:
+    image: golang:1.10.3-windowsservercore-1803
+    commands:
+    - dir
+    - go get -t ./...
+    - go test -v ./...

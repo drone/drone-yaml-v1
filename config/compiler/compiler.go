@@ -81,6 +81,9 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 
 	if _, ok := conf.Networks["default"]; !ok {
 		dst := &engine.Network{Driver: "bridge", Name: "default"}
+		if conf.Platform.Name == "windows/amd64" {
+			dst.Driver = "nat"
+		}
 		spec.Networks = append(spec.Networks, dst)
 	}
 
@@ -99,7 +102,7 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 		spec.Volumes = append(spec.Volumes, dst)
 	}
 
-	if c.noclone == false || conf.Clone.Disabled == true {
+	if c.noclone == false && conf.Clone.Disable == false {
 		dst := &engine.Step{}
 		src := &yaml.Container{Name: "clone", Image: "plugins/git:1"}
 		copyContainer(dst, src)

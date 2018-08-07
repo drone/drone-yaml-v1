@@ -1,0 +1,12 @@
+platform:
+  name: windows/amd64
+
+workspace:
+  base: c:\gopath
+  path: src\github.com\drone\envsubst
+
+pipeline:
+- test:
+    image: golang:1.10.3-windowsservercore-1803
+    commands:
+      - go version

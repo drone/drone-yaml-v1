@@ -61,7 +61,7 @@ type (
 
 	// Clone provides clone customization
 	Clone struct {
-		Disabled bool
-		Depth    int
+		Disable bool
+		Depth   int
 	}
 )

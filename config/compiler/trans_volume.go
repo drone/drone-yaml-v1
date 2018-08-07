@@ -1,6 +1,7 @@
 package compiler
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/drone/drone-runtime/engine"
@@ -16,7 +17,13 @@ func transformVolume(volume ...string) Transform {
 				source string
 				target string
 			)
-			parts := strings.Split(mapping, ":")
+			var parts []string
+			if conf.Platform.Name == "windows/amd64" {
+				parts = splitVolumeParts(mapping)
+			} else {
+				parts = strings.Split(mapping, ":")
+			}
+
 			if len(parts) != 2 {
 				continue
 			}
@@ -33,5 +40,22 @@ func transformVolume(volume ...string) Transform {
 				Target: target,
 			})
 		}
+	}
+}
+
+var volumeRE = regexp.MustCompile(`^((?:[\w]\:)?[^\:]*)\:((?:[\w]\:)?[^\:]*)(?:\:([rwom]*))?`)
+
+func splitVolumeParts(volumeParts string) []string {
+	if volumeRE.MatchString(volumeParts) {
+		results := volumeRE.FindStringSubmatch(volumeParts)[1:]
+		cleanResults := []string{}
+		for _, item := range results {
+			if item != "" {
+				cleanResults = append(cleanResults, item)
+			}
+		}
+		return cleanResults
+	} else {
+		return strings.Split(volumeParts, ":")
 	}
 }
