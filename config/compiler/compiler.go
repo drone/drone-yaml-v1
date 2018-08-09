@@ -103,8 +103,15 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 	}
 
 	if c.noclone == false && conf.Clone.Disable == false {
+		image := "drone/git"
+		switch conf.Platform.Name {
+		case "linux/arm":
+			image = "drone/git:linux-arm"
+		case "linux/arm64":
+			image = "drone/git:linux-arm64"
+		}
 		dst := &engine.Step{}
-		src := &yaml.Container{Name: "clone", Image: "plugins/git:1"}
+		src := &yaml.Container{Name: "clone", Image: image}
 		copyContainer(dst, src)
 		for _, t := range c.transforms {
 			t(dst, src, conf)

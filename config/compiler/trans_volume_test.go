@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/drone/drone-runtime/engine"
+	"github.com/drone/drone-yaml-v1/config"
 	"github.com/drone/drone-yaml-v1/yaml"
 )
 
@@ -34,8 +35,9 @@ func Test_transformVolume(t *testing.T) {
 	for _, testdata := range testdatum {
 		src := new(yaml.Container)
 		dst := new(engine.Step)
+		conf := new(config.Config)
 
-		transformVolume(testdata.volume)(dst, src, nil)
+		transformVolume(testdata.volume)(dst, src, conf)
 
 		if testdata.skipped {
 			if len(dst.Volumes) != 0 {
