@@ -50,13 +50,13 @@ func assertService(dst *engine.Step, src *yaml.Container) bool {
 	return len(src.Commands) == 0 && dst.Detached
 }
 
-var workdirRe = regexp.MustCompile(`^([a-zA-Z]):\\(.*)?`)
+var workdirRe = regexp.MustCompile(`^([a-zA-Z]):\\(.+)`)
 
 func normalizeWorkdirWindows(path string) string {
 	if workdirRe.MatchString(path) == false {
 		return path
 	}
-	parts := workdirRe.FindStringSubmatch(path)
+	parts := workdirRe.FindStringSubmatch(path)[1:]
 	if len(parts) != 2 {
 		return path
 	}
