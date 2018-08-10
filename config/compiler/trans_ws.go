@@ -22,10 +22,6 @@ func transformWorkspace(defaultBase, defaultPath string) Transform {
 		}
 		if !assertService(dst, src) {
 			dst.WorkingDir = path.Join(workdirBase, workdirPath)
-
-			if conf.Platform.Name == "windows/amd64" {
-				dst.WorkingDir = normalizeWorkdirWindows(dst.WorkingDir)
-			}
 		}
 		if !assertDefaultVolume(dst) {
 			volume := &engine.VolumeMapping{
