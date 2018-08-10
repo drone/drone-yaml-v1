@@ -25,8 +25,8 @@
 [[projects]]
   name = "github.com/bmatcuk/doublestar"
   packages = ["."]
-  revision = "b3608229437ba4dc33dae64d56a79a2a73f1f6b2"
-  version = "v1.0.9"
+  revision = "b91dabe072f389956423cdf45dc96527ec29967b"
+  version = "v1.0.10"
 
 [[projects]]
   name = "github.com/coreos/go-semver"
@@ -43,11 +43,10 @@
 [[projects]]
   name = "github.com/docker/distribution"
   packages = [
-    "digest",
+    "digestset",
     "reference"
   ]
-  revision = "48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89"
-  version = "v2.6.2"
+  revision = "749f6afb4572201e3c37325d0ffedb6f32be8950"
 
 [[projects]]
   name = "github.com/docker/go-units"
@@ -62,7 +61,7 @@
     "engine",
     "version"
   ]
-  revision = "15b4cacaab1a1bcafb61e246a6207b7b13bf5a1c"
+  revision = "f7dd0f0f353ea08839ebce1238a9a9fddddd4f20"
 
 [[projects]]
   branch = "master"
@@ -79,8 +78,8 @@
 [[projects]]
   name = "github.com/gosimple/slug"
   packages = ["."]
-  revision = "e9f42fa127660e552d0ad2b589868d403a9be7c6"
-  version = "v1.1.1"
+  revision = "91d42f4c3433698e88e87b17a3efbfe40b67c323"
+  version = "v1.2.0"
 
 [[projects]]
   name = "github.com/kr/pretty"
@@ -101,6 +100,12 @@
   version = "v0.0.3"
 
 [[projects]]
+  name = "github.com/opencontainers/go-digest"
+  packages = ["."]
+  revision = "279bed98673dd5bef374d3b6e4b09e2af76183bf"
+  version = "v1.0.0-rc1"
+
+[[projects]]
   branch = "master"
   name = "github.com/rainycape/unidecode"
   packages = ["."]
@@ -116,7 +121,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b"
+  revision = "98c5dad5d1a0e8a73845ecc8897d0bd56586511d"
 
 [[projects]]
   branch = "fix-for-issue-91"
@@ -128,6 +133,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6066e5bf6d6b862bee7f02d56125c45e5f8eb14d1fe6c85876cf31f3c0876c6e"
+  inputs-digest = "0de8421ed21ed490ece07abd27f779468797133ad4a649d51c7944cf1c39dbec"
   solver-name = "gps-cdcl"
   solver-version = 1

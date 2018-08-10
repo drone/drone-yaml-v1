@@ -187,6 +187,7 @@ func TestParseMulti(t *testing.T) {
 	got, err := ParseMultiString(sampleYamlMulti)
 	if err != nil {
 		t.Error(err)
+		return
 	}
 	want := []*Config{
 		&Config{
@@ -252,10 +253,10 @@ pipeline:
         - go lint
 ---
 metadata:
-	name: frontend
+  name: frontend
 
 platform:
-	name: linux/arm
+  name: linux/arm
 
 pipeline:
   - test:

@@ -44,7 +44,9 @@
 
 [[constraint]]
   name = "github.com/docker/distribution"
-  version = "2.6.2"
+  # version = "2.6.2"
+  # branch = "master"
+  revision = "749f6afb4572201e3c37325d0ffedb6f32be8950"
 
 [[constraint]]
   name = "github.com/docker/go-units"
