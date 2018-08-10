@@ -1,7 +1,9 @@
 package compiler
 
 import (
+	"fmt"
 	"path"
+	"regexp"
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-yaml-v1/config"
@@ -20,6 +22,10 @@ func transformWorkspace(defaultBase, defaultPath string) Transform {
 		}
 		if !assertService(dst, src) {
 			dst.WorkingDir = path.Join(workdirBase, workdirPath)
+
+			if conf.Platform.Name == "windows/amd64" {
+				dst.WorkingDir = normalizeWorkdirWindows(dst.WorkingDir)
+			}
 		}
 		if !assertDefaultVolume(dst) {
 			volume := &engine.VolumeMapping{
@@ -42,4 +48,17 @@ func assertDefaultVolume(dst *engine.Step) bool {
 
 func assertService(dst *engine.Step, src *yaml.Container) bool {
 	return len(src.Commands) == 0 && dst.Detached
+}
+
+var workdirRe = regexp.MustCompile(`^([a-zA-Z]):\\(.*)?`)
+
+func normalizeWorkdirWindows(path string) string {
+	if workdirRe.MatchString(path) == false {
+		return path
+	}
+	parts := workdirRe.FindStringSubmatch(path)
+	if len(parts) != 2 {
+		return path
+	}
+	return fmt.Sprintf(`\%s\%s`, parts[0], parts[1])
 }

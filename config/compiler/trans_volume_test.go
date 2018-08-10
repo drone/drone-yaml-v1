@@ -1,6 +1,7 @@
 package compiler
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/drone/drone-runtime/engine"
@@ -54,6 +55,72 @@ func Test_transformVolume(t *testing.T) {
 		}
 		if got, want := dst.Volumes[0].Target, testdata.target; got != want {
 			t.Errorf("Got volume target %q, want %q", got, want)
+		}
+	}
+}
+
+func Test_splitVolumeParts(t *testing.T) {
+	testdata := []struct {
+		from    string
+		to      []string
+		success bool
+	}{
+		{
+			from:    `Z::Z::rw`,
+			to:      []string{`Z:`, `Z:`, `rw`},
+			success: true,
+		},
+		{
+			from:    `Z:\:Z:\:rw`,
+			to:      []string{`Z:\`, `Z:\`, `rw`},
+			success: true,
+		},
+		{
+			from:    `Z:\git\refs:Z:\git\refs:rw`,
+			to:      []string{`Z:\git\refs`, `Z:\git\refs`, `rw`},
+			success: true,
+		},
+		{
+			from:    `Z:\git\refs:Z:\git\refs`,
+			to:      []string{`Z:\git\refs`, `Z:\git\refs`},
+			success: true,
+		},
+		{
+			from:    `Z:/:Z:/:rw`,
+			to:      []string{`Z:/`, `Z:/`, `rw`},
+			success: true,
+		},
+		{
+			from:    `Z:/git/refs:Z:/git/refs:rw`,
+			to:      []string{`Z:/git/refs`, `Z:/git/refs`, `rw`},
+			success: true,
+		},
+		{
+			from:    `Z:/git/refs:Z:/git/refs`,
+			to:      []string{`Z:/git/refs`, `Z:/git/refs`},
+			success: true,
+		},
+		{
+			from:    `/test:/test`,
+			to:      []string{`/test`, `/test`},
+			success: true,
+		},
+		{
+			from:    `test:/test`,
+			to:      []string{`test`, `/test`},
+			success: true,
+		},
+		{
+			from:    `test:test`,
+			to:      []string{`test`, `test`},
+			success: true,
+		},
+	}
+	for _, test := range testdata {
+		results := splitVolumeParts(test.from)
+
+		if reflect.DeepEqual(results, test.to) != test.success {
+			t.Errorf("Expect %q matches %q is %v", test.from, results, test.to)
 		}
 	}
 }

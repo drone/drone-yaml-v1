@@ -55,7 +55,6 @@ func splitVolumeParts(volumeParts string) []string {
 			}
 		}
 		return cleanResults
-	} else {
-		return strings.Split(volumeParts, ":")
 	}
+	return strings.Split(volumeParts, ":")
 }
