@@ -30,6 +30,11 @@ func transformWorkspace(defaultBase, defaultPath string) Transform {
 			}
 			dst.Volumes = append(dst.Volumes, volume)
 		}
+		if dst.Environment == nil {
+			dst.Environment = map[string]string{}
+		}
+		dst.Environment["DRONE_WORKSPACE"] = path.Join(workdirBase, workdirPath)
+		dst.Environment["DRONE_WORKSPACE_BASE"] = workdirBase
 	}
 }
 
