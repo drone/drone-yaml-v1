@@ -51,7 +51,11 @@ type (
 
 	// Platform provides platform details
 	Platform struct {
-		Name string
+		Name    string
+		OS      string `yaml:"os"`
+		Arch    string `yaml:"arch"`
+		Variant string `yaml:"variant"`
+		Kernel  string `yaml:"kernel"`
 	}
 
 	// Metadata provides platform details
