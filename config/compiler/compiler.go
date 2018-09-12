@@ -222,7 +222,9 @@ func copyContainerVolume(dst *engine.Step, src *yaml.Container) {
 	for _, vol := range src.Volumes {
 		volume := &engine.VolumeMapping{}
 		volume.Target = vol.Destination
-		if strings.HasPrefix(vol.Source, "/") {
+		if strings.HasPrefix(vol.Source, `\\.\pipe\`) {
+			volume.Source = vol.Source
+		} else if strings.HasPrefix(vol.Source, "/") {
 			volume.Source = vol.Source
 		} else {
 			volume.Name = vol.Source
