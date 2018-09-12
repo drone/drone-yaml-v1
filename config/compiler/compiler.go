@@ -109,7 +109,10 @@ func (c *Compiler) Compile(conf *config.Config) (*engine.Config, error) {
 			image = "drone/git:linux-arm"
 		case "linux/arm64":
 			image = "drone/git:linux-arm64"
+		case "windows/amd64":
+			image = "drone/git:windows-1803"
 		}
+
 		dst := &engine.Step{}
 		src := &yaml.Container{Name: "clone", Image: image}
 		copyContainer(dst, src)

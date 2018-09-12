@@ -214,6 +214,11 @@ func Test_matchHostname(t *testing.T) {
 			want:     true,
 		},
 		{
+			image:    "golang:latest",
+			hostname: "index.docker.io",
+			want:     true,
+		},
+		{
 			image:    "library/golang:latest",
 			hostname: "docker.io",
 			want:     true,

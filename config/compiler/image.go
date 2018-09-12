@@ -54,5 +54,8 @@ func matchHostname(image, hostname string) bool {
 	if err != nil {
 		return false
 	}
+	if hostname == "index.docker.io" {
+		hostname = "docker.io"
+	}
 	return reference.Domain(named) == hostname
 }

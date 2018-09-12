@@ -265,3 +265,7 @@ pipeline:
         - npm install
         - npm test
 `
+
+//
+// Test extract documents at index
+//

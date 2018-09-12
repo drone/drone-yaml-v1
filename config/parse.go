@@ -103,3 +103,52 @@ func ParseMultiFile(p string) ([]*Config, error) {
 	defer f.Close()
 	return ParseMulti(f)
 }
+
+//
+// extract yaml documents delimited by ---
+//
+
+// ParseDocuments returns the yaml documents.
+func ParseDocuments(r io.Reader) ([]string, error) {
+	var list []string
+	scanner := bufio.NewScanner(r)
+	row := 0
+	buf := new(bytes.Buffer)
+	for scanner.Scan() {
+		row++
+		txt := scanner.Text()
+		if strings.HasPrefix(txt, "---") && row != 1 {
+			list = append(list, buf.String())
+			buf.Reset()
+		} else {
+			buf.WriteString(txt)
+			buf.WriteByte('\n')
+		}
+	}
+	list = append(list, buf.String())
+	return list, nil
+}
+
+// ParseDocumentsBytes returns the yaml documents.
+func ParseDocumentsBytes(b []byte) ([]string, error) {
+	return ParseDocuments(
+		bytes.NewBuffer(b),
+	)
+}
+
+// ParseDocumentsString returns the yaml documents.
+func ParseDocumentsString(s string) ([]string, error) {
+	return ParseDocumentsBytes(
+		[]byte(s),
+	)
+}
+
+// ParseDocumentsFile returns the yaml documents from file p.
+func ParseDocumentsFile(p string) ([]string, error) {
+	f, err := os.Open(p)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	return ParseDocuments(f)
+}
