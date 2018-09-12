@@ -28,3 +28,11 @@ func Test_normalizeWorkdirWindows(t *testing.T) {
 		}
 	}
 }
+
+func TestToWindows(t *testing.T) {
+	got := toWindowsDrive("/go/src/github.com/octocat/hello-world")
+	want := "c:\\go\\src\\github.com\\octocat\\hello-world"
+	if got != want {
+		t.Errorf("Want windows drive %q, got %q", want, got)
+	}
+}

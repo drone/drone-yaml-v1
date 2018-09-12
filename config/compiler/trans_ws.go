@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"path"
 	"regexp"
+	"strings"
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-yaml-v1/config"
@@ -15,10 +16,18 @@ func transformWorkspace(defaultBase, defaultPath string) Transform {
 		workdirBase := conf.Workspace.Base
 		workdirPath := conf.Workspace.Path
 		if workdirBase == "" {
-			workdirBase = defaultBase
+			if conf.Platform.Name == "windows/amd64" {
+				workdirBase = toWindowsDrive(defaultBase)
+			} else {
+				workdirBase = defaultBase
+			}
 		}
 		if workdirPath == "" {
-			workdirPath = defaultPath
+			if conf.Platform.Name == "windows/amd64" {
+				workdirPath = toWindowsPath(defaultPath)
+			} else {
+				workdirPath = defaultPath
+			}
 		}
 		if !assertService(dst, src) {
 			dst.WorkingDir = path.Join(workdirBase, workdirPath)
@@ -36,6 +45,14 @@ func transformWorkspace(defaultBase, defaultPath string) Transform {
 		dst.Environment["DRONE_WORKSPACE"] = path.Join(workdirBase, workdirPath)
 		dst.Environment["DRONE_WORKSPACE_BASE"] = workdirBase
 	}
+}
+
+func toWindowsDrive(s string) string {
+	return "c:" + toWindowsPath(s)
+}
+
+func toWindowsPath(s string) string {
+	return strings.Replace(s, "/", "\\", -1)
 }
 
 func assertDefaultVolume(dst *engine.Step) bool {
